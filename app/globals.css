@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 8 8% 8%;
+    --foreground: 120 100% 85%;
+    --card: 12 12% 12%;
+    --card-foreground: 120 100% 85%;
+    --popover: 12 12% 12%;
+    --popover-foreground: 120 100% 85%;
+    --primary: 120 100% 50%;
+    --primary-foreground: 8 8% 8%;
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 8 8% 8%;
+    --muted: 16 16% 16%;
+    --muted-foreground: 120 50% 65%;
+    --accent: 120 100% 40%;
+    --accent-foreground: 8 8% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 120 30% 25%;
+    --input: 120 30% 25%;
+    --ring: 120 100% 50%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 4 4% 4%;
+    --foreground: 120 100% 90%;
+    --card: 8 8% 8%;
+    --card-foreground: 120 100% 90%;
+    --popover: 8 8% 8%;
+    --popover-foreground: 120 100% 90%;
+    --primary: 120 100% 45%;
+    --primary-foreground: 4 4% 4%;
+    --secondary: 180 100% 45%;
+    --secondary-foreground: 4 4% 4%;
+    --muted: 12 12% 12%;
+    --muted-foreground: 120 40% 70%;
+    --accent: 120 100% 35%;
+    --accent-foreground: 4 4% 4%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 120 25% 20%;
+    --input: 120 25% 20%;
+    --ring: 120 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .matrix-glow {
+    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary));
+  }
+
+  .tech-border {
+    border: 1px solid hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.1), inset 0 0 20px hsl(var(--primary) / 0.05);
+  }
+
+  .cyber-grid {
+    background-image: linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .matrix-bg {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--primary) / 0.05) 50%,
+      hsl(var(--background)) 100%
+    );
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Matrix Rain Animation */
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Matrix Glow Effect */
+.matrix-glow {
+  text-shadow: 
+    0 0 5px hsl(var(--primary)),
+    0 0 10px hsl(var(--primary)),
+    0 0 15px hsl(var(--primary)),
+    0 0 20px hsl(var(--primary) / 0.8);
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from {
+    text-shadow: 
+      0 0 5px hsl(var(--primary)),
+      0 0 10px hsl(var(--primary)),
+      0 0 15px hsl(var(--primary)),
+      0 0 20px hsl(var(--primary) / 0.8);
+  }
+  to {
+    text-shadow: 
+      0 0 10px hsl(var(--primary)),
+      0 0 20px hsl(var(--primary)),
+      0 0 30px hsl(var(--primary)),
+      0 0 40px hsl(var(--primary) / 0.9);
+  }
+}

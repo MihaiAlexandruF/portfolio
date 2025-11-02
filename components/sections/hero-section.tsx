@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import CvDownloadButton from "@/components/ui/cv-download"
 import { AnimatedBackground } from "@/components/ui/animated-background"
 import { CodeSnippet } from "@/components/ui/code-snippet"
 import { FloatingElements } from "@/components/ui/floating-elements"
@@ -41,10 +42,10 @@ Software Engineer with a strong foundation in computer science, focused on build
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="outline" size="lg" className="group bg-transparent" asChild>
-                <a href="/documents/Mihail-Alexandru-CV.pdf" download>
+                <CvDownloadButton>
                   <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
                   Download CV
-                </a>
+                </CvDownloadButton>
               </Button>
             </div>
 

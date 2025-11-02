@@ -24,13 +24,11 @@ export const HeroSection = ({ mousePosition }: HeroSectionProps) => {
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent matrix-glow">
-                  Fullstack
+                  Software Engineer
                 </span>
-                <br />
-                <span className="text-muted-foreground">Developer</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Junior Software Developer passionate about building scalable and maintainable applications. Skilled in C#, Java, Python, and modern frameworks, with a focus on clean code, problem solving, and continuous learning.
+Software Engineer with a strong foundation in computer science, focused on building full-stack systems that solve real problems. I design and ship scalable APIs, reliable backend services, and polished mobile experiences. Experienced with ASP.NET Core, Java Spring Boot, React / React Native, and relational databases. Fast learner, team player, and passionate about clean architecture and measurable impact.
                 </p>
             </div>
 

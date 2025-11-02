@@ -25,6 +25,27 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Personal HomeLab – Self-Hosted Infrastructure with Docker & Traefik ",
+    description: "I’ve built a fully functional home server to experiment with self-hosting, container orchestration, and automation. The infrastructure runs on Docker Compose and Traefik reverse-proxy, hosting multiple media, cloud, and automation services in a secure, isolated environment.",
+    longDescription:
+      "I’ve built a fully functional home server to experiment with self-hosting, container orchestration, and automation. The infrastructure runs on Docker Compose and Traefik reverse-proxy, hosting multiple media, cloud, and automation services in a secure, isolated environment.",
+    tech: ["Ubuntu Server",
+  "Docker Compose",
+  "Traefik Reverse Proxy",
+  "Cloudflare DNS",
+  "Let's Encrypt SSL",
+  "Portainer",
+  "n8n Automation",
+  "Nextcloud",
+  "Jellyfin",
+  "Immich",
+  "Watchtower"],
+    github: "https://github.com/MihaiAlexandruF/real-estate-platform",
+    live: "#",
+    image: "/projects/screenshots/homelab-server/preview.png",
+    featured: true,
+  },
+  {
     title: "Student – Professor Dissertation Portal",
     description: "Web platform for managing dissertation workflows between students and professors",
     longDescription:

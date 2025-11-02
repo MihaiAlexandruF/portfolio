@@ -20,47 +20,45 @@ export const VideoModal = ({ isOpen, onClose, videoSrc, title, posterSrc }: Vide
   const [duration, setDuration] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
+  // Use direct DOM event handlers on the <video> element (attached in JSX)
+  // This avoids timing issues when adding/removing listeners and ensures
+  // the UI updates reliably while dragging the seek bar.
+
+  const togglePlay = async () => {
     const video = videoRef.current
     if (!video) return
 
-    const updateTime = () => setCurrentTime(video.currentTime)
-    const updateDuration = () => setDuration(video.duration)
-
-    video.addEventListener('timeupdate', updateTime)
-    video.addEventListener('loadedmetadata', updateDuration)
-
-    return () => {
-      video.removeEventListener('timeupdate', updateTime)
-      video.removeEventListener('loadedmetadata', updateDuration)
+    try {
+      if (video.paused) {
+        await video.play()
+        setIsPlaying(true)
+      } else {
+        video.pause()
+        setIsPlaying(false)
+      }
+    } catch (err) {
+      // play() can reject due to autoplay policies — fallback to setting state
+      console.warn('Video play failed', err)
+      setIsPlaying(!video.paused)
     }
-  }, [isOpen])
-
-  const togglePlay = () => {
-    const video = videoRef.current
-    if (!video) return
-
-    if (isPlaying) {
-      video.pause()
-    } else {
-      video.play()
-    }
-    setIsPlaying(!isPlaying)
   }
 
   const toggleMute = () => {
     const video = videoRef.current
     if (!video) return
 
-    video.muted = !isMuted
-    setIsMuted(!isMuted)
+    const newMuted = !video.muted
+    video.muted = newMuted
+    setIsMuted(newMuted)
   }
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => {
     const video = videoRef.current
     if (!video) return
-
-    const seekTime = (parseFloat(e.target.value) / 100) * duration
+    const value = (e.target as HTMLInputElement).value
+    const percent = parseFloat(value)
+    if (isNaN(percent) || duration === 0) return
+    const seekTime = (percent / 100) * duration
     video.currentTime = seekTime
     setCurrentTime(seekTime)
   }
@@ -105,6 +103,9 @@ export const VideoModal = ({ isOpen, onClose, videoSrc, title, posterSrc }: Vide
             ref={videoRef}
             className="w-full h-auto max-h-[70vh] object-contain"
             poster={posterSrc}
+            preload="metadata"
+            onLoadedMetadata={(e) => setDuration((e.target as HTMLVideoElement).duration || 0)}
+            onTimeUpdate={(e) => setCurrentTime((e.target as HTMLVideoElement).currentTime || 0)}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onClick={togglePlay}
@@ -114,7 +115,7 @@ export const VideoModal = ({ isOpen, onClose, videoSrc, title, posterSrc }: Vide
           </video>
 
           {/* Video Controls Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${!isPlaying ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -134,18 +135,21 @@ export const VideoModal = ({ isOpen, onClose, videoSrc, title, posterSrc }: Vide
                 {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
               </Button>
 
-              <div className="flex-1 flex items-center gap-2">
-                <span className="text-white text-sm">{formatTime(currentTime)}</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={duration ? (currentTime / duration) * 100 : 0}
-                  onChange={handleSeek}
-                  className="flex-1 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer"
-                />
-                <span className="text-white text-sm">{formatTime(duration)}</span>
-              </div>
+                <div className="flex-1 flex items-center gap-2">
+                  <span className="text-white text-sm">{formatTime(currentTime)}</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    value={duration ? (currentTime / duration) * 100 : 0}
+                    onChange={handleSeek}
+                    onInput={handleSeek}
+                    aria-label="Seek"
+                    className="flex-1 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <span className="text-white text-sm">{formatTime(duration)}</span>
+                </div>
 
               <Button
                 variant="ghost"

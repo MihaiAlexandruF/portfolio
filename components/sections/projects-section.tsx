@@ -228,6 +228,38 @@ export const ProjectsSection = () => {
             <p className="text-sm text-muted-foreground">Passenger survival prediction </p>
           </div>
         </div>
+ 
+          <div className="col-span-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="p-4 bg-card/50 rounded-lg border hover:border-rose-500/50 hover:bg-card/70 transition-all duration-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-rose-500 rounded-full" />
+                  <span className="text-sm font-medium text-rose-500">n8n</span>
+                </div>
+                <h4 className="font-semibold mb-1">Cover letter generator</h4>
+                <p className="text-sm text-muted-foreground">Automated cover letter creation using AI and form inputs</p>
+              </div>
+
+              <div className="p-4 bg-card/50 rounded-lg border hover:border-indigo-500/50 hover:bg-card/70 transition-all duration-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full" />
+                  <span className="text-sm font-medium text-indigo-500">ESP32 & MQTT</span>
+                </div>
+                <h4 className="font-semibold mb-1">Smart Barrier System</h4>
+                <p className="text-sm text-muted-foreground">Vehicle counting & remote gate control</p>
+              </div>
+
+              <div className="p-4 bg-card/50 rounded-lg border hover:border-fuchsia-500/50 hover:bg-card/70 transition-all duration-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-fuchsia-500 rounded-full" />
+                  <span className="text-sm font-medium text-fuchsia-500">Pi-hole & WireGuard</span>
+                </div>
+                <h4 className="font-semibold mb-1">Ad-blocking & VPN</h4>
+                <p className="text-sm text-muted-foreground">Secure browsing & DNS filtering</p>
+              </div>
+            </div>
+          </div>
+
 
         {/* Video Modal */}
         {selectedProject && (

@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import CvDownloadButton from "@/components/ui/cv-download"
 import { SocialLinks } from "@/components/ui/social-links"
 import { Mail, Download } from "lucide-react"
 
@@ -32,10 +31,10 @@ export const ContactSection = () => {
               </a>
             </Button>
             <Button variant="outline" size="lg" className="group bg-transparent" asChild>
-              <CvDownloadButton>
+              <a href="/documents/Mihail-Alexandru-CV.pdf" download>
                 <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
                 Download CV
-              </CvDownloadButton>
+              </a>
             </Button>
           </div>
 
